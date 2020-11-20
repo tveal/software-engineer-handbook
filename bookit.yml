@@ -1,0 +1,7 @@
+bookSrc: src
+bookDst: book
+imgDir: img
+lintSrc: true
+chapterTitles:
+  '1': Setup Various Dev Tools
+  '2': CI/CD Things

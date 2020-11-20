@@ -1,0 +1,24 @@
+{
+  "name": "software-engineer-handbook",
+  "version": "1.0.0",
+  "description": "A place for things learned, how-tos, etc. related to software development!",
+  "main": "index.js",
+  "scripts": {
+    "bookit": "bookit build -d",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tveal/software-engineer-handbook.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tveal/software-engineer-handbook/issues"
+  },
+  "homepage": "https://github.com/tveal/software-engineer-handbook#readme",
+  "dependencies": {
+    "bookit": "^1.0.0"
+  }
+}

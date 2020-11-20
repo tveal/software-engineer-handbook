@@ -1,2 +1,12 @@
 # software-engineer-handbook
-A place for things learned, how-tos, etc. related to software development!
+
+Hi! You've landed in the source-code home; See the
+**[Software Engineer Handbook](./book/index.md)**.
+
+
+## Bookit Generation Tool
+
+To rebuild this book from source
+```
+npx bookit build
+```
