@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "bookit": "bookit build -d",
+    "pre:commit": "npm run bookit && ./pre-commit.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/tveal/software-engineer-handbook.git"
   },
+  "pre-commit": "pre:commit",
   "keywords": [],
   "author": "",
   "license": "MIT",
@@ -20,5 +22,8 @@
   "homepage": "https://github.com/tveal/software-engineer-handbook#readme",
   "dependencies": {
     "bookit": "^1.0.0"
+  },
+  "devDependencies": {
+    "pre-commit": "^1.2.2"
   }
 }

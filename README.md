@@ -8,5 +8,6 @@ Hi! You've landed in the source-code home; See the
 
 To rebuild this book from source
 ```
-npx bookit build
+npm ci
+npm run bookit
 ```
