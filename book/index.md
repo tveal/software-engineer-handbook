@@ -10,6 +10,7 @@ Chapter 1: **Setup Various Dev Tools**
 - [1.2 SSH Keys](./134d9622-bae1-47f6-bec6-8dac5da9d798.md)
 - [1.3 Java](./990aef78-054d-44cf-bee1-fe2bad77c363.md)
 - [1.4 Babel JavaScript Compiler](./b2a09cea-b1a5-48c3-a3fe-e1b50c724df3.md)
+- [1.5 Git Submodules](./05a2257b-3588-49e4-94ab-b77ef53d512a.md)
 
 Chapter 2: **CI/CD Things**
 ---
