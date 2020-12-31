@@ -1,0 +1,113 @@
+1c7f4380-1eb3-426a-8805-3c521cea585b
+
+# Git Aliases and Init
+
+## Aliases
+
+Any new git setup I come across, I quickly set aliases for the most fundamental
+(and frequent) git commands:
+
+```bash
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+```
+
+See more at https://git-scm.com/book/en/v2/Git-Basics-Git-Aliases
+
+**Git User**
+
+- **Global** - To commit changes to a repo, you will need to configure your
+  author; You can do this at a global level with:
+
+    ```bash
+    git config --global user.email "your.git.user.email@host.com"
+    git config --global user.name "your-git-username"
+    ```
+
+- **Local** - But if you operate with different git users, depending on repo,
+  then omit the `--global` flag, and run per repo
+
+    ```bash
+    git config user.email "your.git.user.email@host.com"
+    git config user.name "your-git-username"
+    ```
+
+- **Alias** - Even better, make it an alias! Wherever your bash profile config
+  is, such as `~/.bashrc`, add an alias to the file, like so:
+
+    ```bash
+    alias iamgit='git config user.email "your.git.user.email@host.com"; git config user.name "your-git-username"'
+    ```
+    You'll need to reload your terminal to get the new alias in-session
+
+## Create a New Repo
+
+Multiple Options (to list a few)
+1. Locally: From command-line
+2. Remote: Git repository server, typically via GUI
+3. Hybrid: From command-line, then on server, and merge the two
+
+The optimal option depends on your case and/or preference. Try them all out -
+add to your toolbox; You never know when you might need to do things
+differently.
+
+### [1] From Command Line
+
+1. Make a new directory for your repo
+
+    ```bash
+    mkdir my-cool-new-repo
+    ```
+
+2. Initialize a git repo
+
+    ```bash
+    cd my-cool-new-repo
+    git init
+    ```
+
+3. Add initial commit
+
+    ```bash
+    echo "# my-cool-new-repo" > README.md
+    git add README.md
+    git commit -m 'initial commit'
+    ```
+
+### [2] From Git Repository Server
+
+1. Follow the procedure for your chosen git server in creating a repo
+2. Clone your new repo from the url provided by your server
+
+    ```bash
+    git clone <clone-url>
+    ```
+    This will clone your repo into a new directory (with name of the repo you
+    created on the server). Run `ls -l` to see the files/folders in your current
+    directory
+
+### [3] Create locally, then migrate to remote
+
+There's many ways this can be done. I'll outline a workflow and leave the rest
+up to you to explore. The gist:
+- Create a repo locally, do things, commit code, etc.
+- When you want to publish to a remote server, create a remote repo of same
+  name, but don't add initial files/commit
+- Take the clone url of the new remote repo, and add it as a remote to your
+  local repo and push
+
+**Checking/Adding remote url to local git repo**
+
+List existing remote url's
+```bash
+git remote -v
+```
+
+Add new remote
+```bash
+git remote add origin <clone-url>
+```
+
+See more with `git remote -h` or at https://git-scm.com/docs/git-remote

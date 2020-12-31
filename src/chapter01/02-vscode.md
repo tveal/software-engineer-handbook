@@ -92,5 +92,6 @@ Follow the setup appropriate for your system
 - [Time Converter](https://marketplace.visualstudio.com/items?itemName=HaaLeo.timing)
 - [vscode-base64](https://marketplace.visualstudio.com/items?itemName=adamhartford.vscode-base64)*
 - [XML Tools](https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml)
+- [Draw.io Integration](https://marketplace.visualstudio.com/items?itemName=hediet.vscode-drawio)*
 
 *only on vscode, not vscodium

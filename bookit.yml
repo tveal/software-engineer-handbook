@@ -4,4 +4,7 @@ imgDir: img
 lintSrc: true
 chapterTitles:
   '1': Setup Various Dev Tools
-  '2': CI/CD Things
+  '2': Git Toolbox
+  '3': Bash Programming
+  '4': Raspberry Pi Commander
+  '5': CI/CD Things
