@@ -19,14 +19,17 @@ Given:
     - bash
     - node
     - code editor of your choice
-  - (optional) Virtualization Software for Pi VM of [Pi Desktop](https://www.raspberrypi.org/software/raspberry-pi-desktop/)
+  - (optional) Virtualization Software for Pi VM of
+    [Pi Desktop](https://www.raspberrypi.org/software/raspberry-pi-desktop/)
 
 Then:
 - Let's dive straight into the code that will provision and update the Pi
 
 ## Name of Things
 
-Naming things is hard. Especially in a tutorial. For simplicity, here's the names I'll roll with. You're free to rename as desired, just substitute appropriately as you read this.
+Naming things is hard. Especially in a tutorial. For simplicity, here's the
+names I'll roll with. You're free to rename as desired, just substitute
+appropriately as you read this.
 - **repo name**: pi-commander
 - **initial folder layout**:
     ```
@@ -162,12 +165,17 @@ Naming things is hard. Especially in a tutorial. For simplicity, here's the name
     git push origin <branch-name>
     ```
 
+[**Initial bash setup complete!**](https://github.com/tveal/template-pi-commander/compare/v0...v0.0-getting-started)
+
 ### What did we just do?
 
 Think about it this way:
-- We made a single entry point, `pi-commander/update.sh`, that can eventually be called on a schedule, to update our Raspberry Pi
-- We now have a pattern to scale out bash scripts to provision various tools we want on the Raspberry Pi
-- Being tracked in git, we can push these changes to remote, and pull them onto the Raspberry Pi
+- We made a single entry point, `pi-commander/update.sh`, that can eventually be
+  called on a schedule, to update our Raspberry Pi
+- We now have a pattern to scale out bash scripts to provision various tools we
+  want on the Raspberry Pi
+- Being tracked in git, we can push these changes to remote, and pull them onto
+  the Raspberry Pi
 - Bonus: We have some helpful logging :)
 
 This is just the beginning...
