@@ -8,10 +8,14 @@ Given:
     - Install dependencies if not installed
   - A way to get current IP address
 - Selected dependencies
-  - [qrencode](https://linux.die.net/man/1/qrencode)
+  - [qrencode](https://linux.die.net/man/1/qrencode) (phase 1)
+  - [ImageMagick](https://imagemagick.org/index.php) (phase 3)
 
 Then:
 - Start scripting in `bash/wallpaper/update.sh`
+  - Phase 1: Create QR Code from IP
+  - Phase 2: Set Wallpaper on Raspberry Pi
+  - Phase 3: Add Text and Style to Wallpaper
 
 ## Phase 1
 ---
