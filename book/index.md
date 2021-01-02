@@ -27,6 +27,7 @@ Chapter 4: **Raspberry Pi Commander**
 - [4.1 Getting Started](./961f3153-0cf6-4da1-a75b-ab3679170a33.md)
 - [4.2 Wallpaper with QR Code](./81f3843d-4f9d-41fd-a259-2a1f8e32e4f7.md)
 - [4.3 Scheduling Updates](./018672d1-fbe1-40d7-9fcf-23396c83b628.md)
+- [4.4 Provisioning Node.js](./66e1ac1c-0f66-4f8f-893d-5124087416be.md)
 
 Chapter 5: **CI/CD Things**
 ---

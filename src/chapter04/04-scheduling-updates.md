@@ -119,7 +119,7 @@ runMain "$@"
 ```
 
 Now, when you run `bash/crontab/update.sh`, you should see output similar to
-```
+```log
 2021-01-02 15:47:56 [START] update.sh {crontab}
 <crontab>
 */5 * * * * /home/coder/pi-commander/bash/crontab/../../update.sh &>> /home/coder/pi-commander/bash/crontab/cron.log
