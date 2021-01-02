@@ -184,3 +184,101 @@ Back in the file `bash/wallpaper/update.sh`, add these statements to the main fu
 [**Phase 2 complete!**](https://github.com/tveal/template-pi-commander/compare/v0.1-wallpaper-p1...v0.2-wallpaper-p2)
 Now your wallpaper update script should set the Raspberry Pi's wallpaper to the
 generated QR code.
+
+## Phase 3
+---
+### Add Text and Style to Wallpaper
+
+Scope
+- Combine QR code image with a logo image
+- Add IP and timestamp text
+- Resize and fill image to 7" Pi screen
+
+**Combine QR code image with a logo image**
+
+First, we need to install a new dependency that will allow us to change images
+from command-line, imagemagick. Add the following to the `installDependencies`
+function
+
+```bash
+  if notInstalled imagemagick; then
+    echo "Installing imagemagick..."
+    sudo apt-get install -y imagemagick
+  fi
+```
+
+Second, add the following to the createWallpaper function
+
+```bash
+  # combine Pi-CMD-logo with qrcode
+  montage "$THIS_DIR/Pi-CMD-logo.png" "$THIS_DIR/qrcode.png" -background '#151c23' -geometry +2+2 "$THIS_DIR/wallpaper.png"
+```
+
+Third, create/copy a logo image, such as [Pi-CMD-logo.png](../../img/Pi-CMD-logo.png) to the `bash/wallpaper` directory.
+
+Finally, update the `bash/wallpaper/.gitignore` file to exclude wallpaper.png
+
+```.gitignore
+# bash/wallpaper/.gitignore
+qrcode.png
+wallpaper.png
+```
+
+If everything went well, the script this far should create a `wallpaper.png` file that looks something like this:
+
+![](../../img/pi-cmd-logo-wallpaper.png)
+
+**Add IP and timestamp text**
+
+Now add another set of statements to the ``createWallpaper` function
+
+```bash
+  # add ip and timestamp to wallpaper
+  convert \
+    "$THIS_DIR/wallpaper.png" \
+    -gravity SouthEast \
+    -pointsize 15 \
+    -fill '#fff' \
+    -annotate 0 "IP: $ip | $(date '+%Y-%m-%d %T')" \
+    "$THIS_DIR/wallpaper.png"
+```
+
+Running the wallpaper update script again should now include the IP and timestamp (should show a real address, not `127.0.0.1` in this sample)
+
+![](../../img/pi-cmd-logo-wallpaper-with-text.png)
+
+**Resize and fill image to 7" Pi screen**
+
+Add another convert transformation in the `createWallpaper` function
+
+```bash
+  # resize and fill to 7" touchscreen
+  convert \
+    "$THIS_DIR/wallpaper.png" \
+    -resize 800x480 \
+    -background '#151c23' \
+    -gravity center \
+    -extent 800x480 \
+    "$THIS_DIR/wallpaper.png"
+```
+
+One last thing: back in the `main` function, where we tell the Raspberry Pi to
+set the wallpaper, change the filename from `qrcode.pnd` to `wallpaper.png`
+
+FROM
+```bash
+pcmanfm -d -w "$THIS_DIR/qrcode.png" --wallpaper-mode fit --display :0
+```
+TO
+```bash
+pcmanfm -d -w "$THIS_DIR/wallpaper.png" --wallpaper-mode fit --display :0
+```
+
+At last, running the wallpaper update script should create a wallpaper.png with
+- logo and QA code
+- text with IP and timestamp
+- resized for 7" Pi Touchscreen
+
+![](../../img/pi-cmd-logo-wallpaper-with-text-resize.png)
+
+[**Phase 3 complete!**](https://github.com/tveal/template-pi-commander/compare/v0.2-wallpaper-p2...v0.3-wallpaper-p3)
