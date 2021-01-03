@@ -29,6 +29,7 @@ Chapter 4: **Raspberry Pi Commander**
 - [4.3 Scheduling Updates](./018672d1-fbe1-40d7-9fcf-23396c83b628.md)
 - [4.4 Provisioning Node.js](./66e1ac1c-0f66-4f8f-893d-5124087416be.md)
 - [4.5 Git Updates](./e862bf05-db63-452e-b804-8d674f928c3b.md)
+- [4.6 Updating All the Things!](./9e8293f3-4f1a-47b1-ac7f-058b21ac78f8.md)
 
 Chapter 5: **CI/CD Things**
 ---
