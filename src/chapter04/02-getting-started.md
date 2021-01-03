@@ -179,3 +179,30 @@ Think about it this way:
 - Bonus: We have some helpful logging :)
 
 This is just the beginning...
+
+## Following Sections
+
+On the following sections in this chapter, we'll be making incremental changes
+to this pi-commander repo. I'll **omit the repetitive commit-and-push steps**,
+but strongly encourage you to follow the commit-and-push steps at the end of
+_each section_ that makes changes. The pattern:
+
+```bash
+git add .
+git commit -m '<replace me with appropriate commit message about change>'
+git push origin <branch-name>
+```
+
+You may choose a safer way to add files, one-by-one, so you're aware of each
+change. This is easy from VSCode in the visual diff viewer, or you can do it
+from command-line
+
+See diff in terminal
+```bash
+git diff <file>
+```
+
+Add specific file
+```bash
+git add <file>
+```

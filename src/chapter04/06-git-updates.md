@@ -1,0 +1,194 @@
+e862bf05-db63-452e-b804-8d674f928c3b
+
+# Git Updates
+
+Given:
+- Have:
+  - Git repo with update scripts (established from previous sections)
+  - Updates already scheduled to run automatically
+- Needs:
+  - Git pull latest
+  - Git set aliases
+  - Determine if changes were made since last 
+
+Then:
+- Add the needful!
+  - git update script
+  - utils function for `hasGitChanges`
+
+## Create New Files
+
+In your pi-commander repo, add two new files in a new folder, _git_
+
+```
+bash/
+  git/
+    .gitignore
+    update.sh
+```
+
+If you want to create these from command-line:
+
+```bash
+mkdir bash/git
+touch bash/git/.gitignore
+touch bash/git/update.sh
+chmod +x bash/git/update.sh
+```
+
+## Add Function to Utils
+
+Add the following to `bash/utils.sh`
+
+```bash
+# IMPORTANT: THIS_DIR is relative to the script that sources this file.
+#  Only works in files one-level deeper than this utils.sh file
+PREV_COMMIT_FILE="$THIS_DIR/../git/prevCommit"
+LAST_COMMIT_FILE="$THIS_DIR/../git/lastCommit"
+function hasGitChanges() {
+  if [[ -f "$PREV_COMMIT_FILE" && -f "$LAST_COMMIT_FILE" ]]; then
+    test "$(cat $PREV_COMMIT_FILE)" != "$(cat $LAST_COMMIT_FILE)"
+  else
+    test ! -f "$PREV_COMMIT_FILE"
+  fi
+}
+```
+
+Takeaways
+- As the comments warn, scripts can only depend on these changes when they live
+  at a path such as `bash/<folder>/<script>`
+  - This works with our established bash functions pattern; but we _cannot_ use
+    this git check in the root update script!
+- We are defining "global" variables, `PREV_COMMIT_FILE` and `LAST_COMMIT_FILE`,
+  that can be referenced in any script that sources this `utils.sh` file; We'll
+  use these directly in `bash/git/update.sh`
+
+## The Update Script
+
+Three needs
+1. Set git aliases if they haven't been set already
+2. Update last and previous commit ID's for change detection
+3. Pull latest if:
+    - on designated trunk branch
+    - git workspace is _clean_ (no uncommitted changes)
+
+Additional safety: Don't halt all updates if git-pull fails (such as network error)
+
+Add the following to `bash/git/update.sh`
+
+```bash
+#!/bin/bash
+THIS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source $THIS_DIR/../utils.sh
+
+function main() {
+  setAliases
+
+  test -f "$LAST_COMMIT_FILE" && cp "$LAST_COMMIT_FILE" "$PREV_COMMIT_FILE"
+
+  # don't halt all update scripts if network breaks on git pull
+  set +e
+  pullLatestIfClean
+  set -e
+
+  echo "$(git log --format="%H" -n 1)" > "$LAST_COMMIT_FILE"
+}
+
+function setAliases() {
+  if [[ "$(git config -l)" != *"alias.co="* ]]; then
+    git config --global alias.co checkout
+  fi
+  if [[ "$(git config -l)" != *"alias.br="* ]]; then
+    git config --global alias.br branch
+  fi
+  if [[ "$(git config -l)" != *"alias.ci="* ]]; then
+    git config --global alias.ci commit
+  fi
+  if [[ "$(git config -l)" != *"alias.st="* ]]; then
+    git config --global alias.st status
+  fi
+}
+
+function pullLatestIfClean() {
+  local trunk="main"
+  local cwd="$(pwd)"
+
+  cd "$THIS_DIR/../../"
+
+  local activeBranch="$(git rev-parse --abbrev-ref HEAD)"
+  local gitDiff="$(git status --porcelain)"
+  if [ -z "$gitDiff" ]; then
+    if [[ "$activeBranch" == "$trunk" ]]; then
+      git pull origin "$trunk"
+    else
+      echo "WARN git not on trunk: $trunk, active: $activeBranch; skipping pull"
+    fi
+  else
+    echo "WARN git diff not clean; skipping pull"
+    git status --porcelain
+  fi
+
+  cd "$cwd"
+}
+
+runMain "$@"
+```
+
+Takeaways
+- Account for network failures if you don't want scripts to halt, by toggling
+  `set +e` and `set -e` around the appropriate scope
+- Update the `PREV_COMMIT_FILE` _before_ pulling latest from remote
+- Update the `LAST_COMMIT_FILE` _after_ pulling latest from remote
+- Set the `trunk` variable to the authoritative branch you want to drive the Pi
+
+Now if you run `bash/git/update.sh`, you should get output like:
+
+```log
+2021-01-02 18:18:16 [START] update.sh {git}
+WARN git diff not clean; skipping pull
+ M bash/utils.sh
+?? bash/git/
+2021-01-02 18:18:16 [COMPLETE] update.sh {git}
+```
+
+You should _also_ find that a file, `bash/git/lastCommit` was generated.
+
+Rerun the script. Should see same/similar output, but this time, another new
+file generated, `bash/git/prevCommit`. Both `lastCommit` and `prevCommit` files
+should have the same value now.
+
+If you run:
+
+```bash
+THIS_DIR="$(pwd)/bash/git" \
+  && source bash/utils.sh \
+  && hasGitChanges \
+  && echo "has changes!" \
+  || echo "NO CHANGES!"
+```
+
+You should see:
+```
+NO CHANGES!
+```
+
+Now delete `bash/git/prevCommit`
+```bash
+rm bash/git/prevCommit
+```
+
+then rerun the `hasGitChanges` check; You should now get:
+```
+has changes!
+```
+
+## .gitignore
+
+add the following to `bash/git/.gitignore`
+
+```.gitignore
+lastCommit
+prevCommit
+```
+
+[Git Updates complete!](https://github.com/tveal/template-pi-commander/compare/v0.5-node...v0.6-git)
