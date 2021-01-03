@@ -90,6 +90,18 @@ file, so we'll use `&>>`. Thus, a format like this:
 command &>> cron.log
 ```
 
+---
+
+BUT WAIT. Cron commands [apparently](https://unix.stackexchange.com/a/52332)
+execute in `/bin/sh`, which does _not_ work with `&>>` redirection :(
+
+So we have to do this:
+```sh
+command >> cron.log 2>&1
+```
+
+---
+
 In the `bash/crontab/update.sh` file, add the code:
 
 ```bash
@@ -100,8 +112,8 @@ source $THIS_DIR/../utils.sh
 function main() {
   local crontabFile="$THIS_DIR/crontab"
   local logFile="$THIS_DIR/cron.log"
-  local updateAll="$THIS_DIR/../../update.sh &>> $logFile"
-  local logRotate="$THIS_DIR/logRotate.sh &>> $logFile"
+  local updateAll="$THIS_DIR/../../update.sh >> $logFile 2>&1"
+  local logRotate="$THIS_DIR/logRotate.sh >> $logFile 2>&1"
 
   echo "*/5 * * * * $updateAll" > $crontabFile
   echo "9-59/10 * * * * $logRotate" >> $crontabFile
