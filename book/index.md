@@ -35,3 +35,7 @@ Chapter 5: **CI/CD Things**
 ---
 - [5.0 Import a Jenkins Library without Global Jenkins Settings](./132c8852-2584-4e6b-a68b-7d5674d598f1.md)
 
+Chapter 6: **JavaScript Tips and Tricks**
+---
+- [6.0 Comparing Objects Containing Functions](./3be79bb7-d905-4e88-9f35-3b6505c638ab.md)
+
