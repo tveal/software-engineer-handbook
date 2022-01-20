@@ -37,5 +37,6 @@ Chapter 5: **CI/CD Things**
 
 Chapter 6: **JavaScript Tips and Tricks**
 ---
-- [6.0 Comparing Objects Containing Functions](./3be79bb7-d905-4e88-9f35-3b6505c638ab.md)
+- [6.0 Smart Merge of Objects](./5259d907-1870-41d0-8764-fca3eed75c7e.md)
+- [6.1 Comparing Objects Containing Functions](./3be79bb7-d905-4e88-9f35-3b6505c638ab.md)
 
