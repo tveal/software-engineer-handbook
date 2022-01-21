@@ -19,3 +19,15 @@ Rewrite commit history (edit commit messages, squash, etc.)
 ```bash
 git rebase -i <commit-id>
 ```
+
+## Notes
+
+Rebasing to tip of another branch
+- "replays" your commit(s) on top of latest of target branch
+
+Rebase interactive and other
+- AVOID rebase when you use `git pull` from the target branch
+- rebase rewrites commit history, so reserve for feature and change branches
+  (NOT trunk/main)
+  - can be used to remove sensitive data that
+    was checked in by accident
