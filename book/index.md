@@ -14,7 +14,8 @@ Chapter 1: **Setup Various Dev Tools**
 Chapter 2: **Git Toolbox**
 ---
 - [2.0 Git Aliases and Init](./1c7f4380-1eb3-426a-8805-3c521cea585b.md)
-- [2.1 Git Submodules](./05a2257b-3588-49e4-94ab-b77ef53d512a.md)
+- [2.1 Git Rebase](./b17e0d10-7115-440d-b6f6-4bb70efe6e9c.md)
+- [2.2 Git Submodules](./05a2257b-3588-49e4-94ab-b77ef53d512a.md)
 
 Chapter 3: **Bash Programming**
 ---
